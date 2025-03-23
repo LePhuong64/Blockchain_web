@@ -1,0 +1,60 @@
+/* ManageExam */
+.exam-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  margin-left: 5px; /* Thêm khoảng cách lề trái */
+}
+
+.exam-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.exam-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #202124;
+  margin-bottom: 5px;
+}
+
+.exam-meta {
+  font-size: 16px;
+  color: #5f6368;
+  width: 150px; /* Đặt chiều rộng cố định để căn chỉnh */
+}
+
+.exam-subject {
+  font-size: 14px;
+  color: #555;
+}
+
+.exam-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-primary {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #155ab6;
+}

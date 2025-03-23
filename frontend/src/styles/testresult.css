@@ -1,0 +1,74 @@
+.card {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  margin: auto;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+.exam-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.exam-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.exam-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #202124;
+  margin-bottom: 5px;
+}
+
+.exam-meta {
+  font-size: 16px;
+  color: #5f6368;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the button */
+  margin-top: 20px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #3182ce; /* Màu nền xanh dương */
+  color: #ffffff; /* Màu chữ trắng */
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  cursor: pointer; /* Change cursor to pointer */
+}
+
+.btn-primary:hover {
+  background-color: #2b6cb0; /* Màu nền xanh dương đậm khi hover */
+}
