@@ -240,6 +240,7 @@ body {
   font-size: 14px;
   color: #5f6368;
   margin-bottom: 10px;
+  flex: 1;
 }
 
 .exam-actions {
@@ -654,8 +655,17 @@ body {
   flex: 1 1 calc(50% - 20px);
 }
 
+.exam-meta-row {
+  display: grid;
+  grid-template-columns: 4fr 1fr; /* 4 phần cho môn học, 1 phần cho thời gian */
+  align-items: center;
+  gap: 10px;
+}
 
+.exam-meta-left {
+  font-weight: bold;
+}
 
-
-
-
+.exam-meta-right {
+  text-align: right;
+}

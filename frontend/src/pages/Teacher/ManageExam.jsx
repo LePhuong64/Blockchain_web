@@ -40,12 +40,16 @@ function ManageExam() {
         <div key={exam._id} className="exam-card">
           <div className="exam-info">
             <div className="exam-title">{exam.name}</div>
-            <div className="exam-meta">Thời gian: {exam.duration} phút</div>
-            <div className="exam-meta">Môn học: {exam.subject}</div> 
-            <div className="exam-status">Trạng thái: {exam.status === "pending" ? "Chờ duyệt" : exam.status === "approved" ? "Đã duyệt" : "Từ chối"}</div>
-            {exam.status === 'rejected' && (
-              <div className="exam-reject-reason">Lý do từ chối: {exam.rejectReason}</div>
-            )}
+            <div className="exam-meta-row">
+              <div className="exam-meta-left">Môn học: {exam.subject}</div>
+              <div className="exam-meta-right">Thời gian: {exam.duration} phút</div>
+            </div>
+            <div className="exam-status-row">
+              <div className="exam-status">Trạng thái: {exam.status === "pending" ? "Chờ duyệt" : exam.status === "approved" ? "Đã duyệt" : "Từ chối"}</div>
+              {exam.status !== 'approved' && (
+                <div className="exam-reject-reason">Lý do từ chối: {exam.rejectReason}</div>
+              )}
+            </div>
           </div>
         </div>
       ))}

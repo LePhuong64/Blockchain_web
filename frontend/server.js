@@ -3,6 +3,7 @@ const cors = require('cors');
 const connectDB = require('./src/utils/db');
 const authController = require('./controllers/authController');
 const examController = require('./controllers/examController');
+const examRoutes = require('./routes/examRoutes');
 const User = require('./models/User');
 const jwt = require('jsonwebtoken');
 const app = express();
@@ -47,6 +48,7 @@ app.put('/api/exams/:examId', examController.updateExam);
 app.delete('/api/exams/:examId', examController.deleteExam);
 app.post('/api/exams/:examId/approve', examController.approveExam);
 app.post('/api/exams/:examId/reject', examController.rejectExam);
+app.use('/api', examRoutes);
 
 app.listen(5000, () => {
   console.log('Server is running on port 5000');

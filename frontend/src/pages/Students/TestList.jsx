@@ -4,45 +4,34 @@ import axios from 'axios';
 import '../../styles/testlist.css';
 
 function TestList() {
-  const [exams, setExams] = useState([]);
+  const [tests, setTests] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchExams = async () => {
+    const fetchTests = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
         console.error('No token found');
         return;
       }
       try {
-        const response = await axios.get('http://localhost:5000/api/exams?status=approved', {
+        const response = await axios.get('http://localhost:5000/api/exams?status=approved', { // Sửa lại từ /tests thành /exams
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
         console.log('API Response:', response.data); // Log the API response
-        setExams(response.data);
+        setTests(response.data);
       } catch (error) {
-        console.error('Error fetching exams:', error);
+        console.error('Error fetching tests:', error);
       }
     };
 
-    fetchExams();
+    fetchTests();
   }, []);
 
   const handleTakeTest = (id) => {
     navigate(`/student/take-test/${id}`);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('vi-VN', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit'
-    });
   };
 
   return (
@@ -50,19 +39,23 @@ function TestList() {
       <div className="card">
         <h2 className="card-title">Danh sách bài kiểm tra</h2>
         
-        {exams.length > 0 ? (
-          exams.map((exam) => (
-            <div key={exam._id} className="exam-card">
-              <div className="exam-info">
-                <div className="exam-title">{exam.name}</div>
-                <div className="exam-meta">
-                  <div>Thời gian làm bài: {exam.duration} phút</div>
-                  <div>Giáo viên: {exam.teacher?.name || 'Chưa có thông tin'}</div>
-                  <div>Ngày tạo: {formatDate(exam.createdAt)}</div>
+        {tests.length > 0 ? (
+          tests.map((test) => (
+            <div key={test._id} className="test-card">
+              <div className="test-info">
+                <div className="test-title">{test.name}</div>
+                <div className="test-meta">
+                  <div className="test-meta-row">
+                    <div>Môn học: {test.subject}</div>
+                    <div>Số câu hỏi: {test.questions.length}</div>
+                  </div>
+                  <div className="test-meta-row">
+                    <div>Thời gian làm bài: {test.duration} phút</div>
+                  </div>
                 </div>
               </div>
-              <div className="exam-actions">
-                <button className="btn-primary" onClick={() => handleTakeTest(exam._id)}>Làm bài</button>
+              <div className="test-actions">
+                <button className="btn-primary" onClick={() => handleTakeTest(test._id)}>Làm bài</button>
               </div>
             </div>
           ))

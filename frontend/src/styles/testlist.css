@@ -58,3 +58,72 @@
 .btn-primary:hover {
   background-color: #155ab6;
 }
+
+.test-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #dadce0;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  margin-left: 5px; /* Thêm khoảng cách lề trái */
+  width: 100%; /* Đặt độ rộng 100% */
+  max-width: 1200px; /* Đặt độ rộng tối đa */
+}
+
+.test-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.test-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1; /* Cho phép test-info chiếm không gian còn lại */
+}
+
+.test-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #202124;
+  margin-bottom: 5px;
+}
+
+.test-meta {
+  font-size: 16px;
+  color: #5f6368;
+  width: 100%; /* Đặt độ rộng 100% */
+}
+
+.test-meta-row {
+  display: flex;
+  justify-content: space-between; /* Đặt các mục meta cách đều nhau */
+  margin-bottom: 5px; /* Thêm khoảng cách giữa các hàng */
+}
+
+.test-meta-row div {
+  margin-right: 20px; /* Thêm khoảng cách giữa các mục meta */
+}
+
+.test-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-shrink: 0; /* Ngăn test-actions co lại */
+}
+
+.btn-primary {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #155ab6;
+}

@@ -13,10 +13,10 @@ exports.createExam = async (req, res) => {
 
 exports.getExams = async (req, res) => {
   const { status } = req.query;
-  const filter = status ? { status } : {}; 
+  const filter = status ? { status } : {};
 
   try {
-    const exams = await Exam.find(filter); 
+    const exams = await Exam.find(filter);
     res.json(exams);
   } catch (error) {
     res.status(500).json({ error: error.message });

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route, Link, useLocation, Navigate, useNavigate } from "react-router-dom";
 import TestList from './TestList';
-import TestHistory from "./TestHistory";
-import TakeTest from "./TakeTest";
-import TestResult from "./TestResult";
-import "../../styles/studenthome.css";
+import TestHistory from './TestHistory';
+import TakeTest from './TakeTest';
+import TestResult from './TestResult';
+import '../../styles/studenthome.css'; 
 
 function StudentHome() {
   const location = useLocation();
@@ -26,22 +26,22 @@ function StudentHome() {
         </div>
         
         <div className="user-profile">
-          <div className="user-avatar">SV</div>
-          <div className="user-name">Sinh viên</div>
+          <div className="user-avatar">HS</div>
+          <div className="user-name">Học sinh</div>
         </div>
         
         <div className="menu">
           <Link 
             to="/student/test-list" 
-            className={`menu-item ${path.includes('/test-list') ? 'active' : ''}`}
+            className={`menu-item ${path.includes('test-list') ? 'active' : ''}`}
           >
             Danh sách bài kiểm tra
           </Link>
           <Link 
             to="/student/test-history" 
-            className={`menu-item ${path.includes('/test-history') ? 'active' : ''}`}
+            className={`menu-item ${path.includes('test-history') ? 'active' : ''}`}
           >
-            Bài kiểm tra đã làm
+            Lịch sử bài kiểm tra
           </Link>
           <button onClick={handleLogout} className="menu-item logout-button">
             Đăng xuất
@@ -53,10 +53,10 @@ function StudentHome() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Navigate to="/student/test-list" />} />
-          <Route path="/student/test-list" element={<TestList />} />
-          <Route path="/student/test-history" element={<TestHistory />} />
-          <Route path="/student/take-test/:id" element={<TakeTest />} />
-          <Route path="/student/result" element={<TestResult />} />
+          <Route path="/test-list" element={<TestList />} />
+          <Route path="/test-history" element={<TestHistory />} />
+          <Route path="/take-test" element={<TakeTest />} />
+          <Route path="/test-result" element={<TestResult />} />
         </Routes>
       </div>
     </div>
