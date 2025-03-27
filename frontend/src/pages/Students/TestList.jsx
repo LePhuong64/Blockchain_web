@@ -15,12 +15,12 @@ function TestList() {
         return;
       }
       try {
-        const response = await axios.get('http://localhost:5000/api/exams?status=approved', { // Sửa lại từ /tests thành /exams
+        const response = await axios.get('http://localhost:5000/api/exams?status=approved', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
-        console.log('API Response:', response.data); // Log the API response
+        console.log('API Response:', response.data);
         setTests(response.data);
       } catch (error) {
         console.error('Error fetching tests:', error);
@@ -47,7 +47,7 @@ function TestList() {
                 <div className="test-meta">
                   <div className="test-meta-row">
                     <div>Môn học: {test.subject}</div>
-                    <div>Số câu hỏi: {test.questions.length}</div>
+                    <div>Số câu hỏi: {test.questionIds ? test.questionIds.length : 0}</div>
                   </div>
                   <div className="test-meta-row">
                     <div>Thời gian làm bài: {test.duration} phút</div>

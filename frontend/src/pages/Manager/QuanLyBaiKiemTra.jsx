@@ -29,7 +29,7 @@ const QuanLyBaiKiemTra = () => {
   const handleApprove = async (examId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.post(`http://localhost:5000/api/exams/${examId}/approve`, {}, {
+      await axios.put(`http://localhost:5000/api/exams/${examId}/approve`, {}, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -43,7 +43,7 @@ const QuanLyBaiKiemTra = () => {
   const handleReject = async (examId) => {
     const token = localStorage.getItem('token');
     try {
-      await axios.post(`http://localhost:5000/api/exams/${examId}/reject`, { reason: rejectReason }, {
+      await axios.put(`http://localhost:5000/api/exams/${examId}/reject`, { reason: rejectReason }, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -133,8 +133,11 @@ const QuanLyBaiKiemTra = () => {
                 {selectedExam.subject && <li><strong>Môn học:</strong> {selectedExam.subject}</li>}
                 {selectedExam.class && <li><strong>Lớp:</strong> {selectedExam.class}</li>}
                 {selectedExam.duration && <li><strong>Thời gian:</strong> {selectedExam.duration} phút</li>}
-                {selectedExam.questions && <li><strong>Số câu hỏi:</strong> {selectedExam.questions.length} câu</li>}
-                {selectedExam.questionTypes && <li><strong>Loại câu hỏi:</strong> {selectedExam.questionTypes.join(', ')}</li>}
+                {selectedExam.questionCount !== undefined ? (
+                  <li><strong>Số câu hỏi:</strong> {selectedExam.questionCount} câu</li>
+                ) : (
+                  selectedExam.questions && <li><strong>Số câu hỏi:</strong> {selectedExam.questions.length} câu</li>
+                )}
               </ul>
               <div className="question-section">
                 <span>Xem nội dung các câu hỏi:</span>

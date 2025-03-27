@@ -10,16 +10,19 @@ function TakeTest() {
   const [answers, setAnswers] = useState({});
   const navigate = useNavigate();
 
+  
   useEffect(() => {
     const fetchQuestions = async () => {
       const token = localStorage.getItem('token');
+      
       try {
-        const response = await axios.get(`http://localhost:5000/api/exams/${id}`, {
+        const response = await axios.get(`http://localhost:5000/api/exams/${id}/questions`, {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
-        setQuestions(response.data.questions);
+        console.log('API response:', response.data);
+        setQuestions(response.data.questions || []);
       } catch (error) {
         console.error('Error fetching questions:', error);
       }
@@ -56,7 +59,7 @@ function TakeTest() {
     try {
       await contract.methods.submitResult(id, score).send({ from: accounts[0] });
       console.log('Result submitted successfully:', { score, examId: id });
-      navigate('/student/result');
+      navigate('/student/test-result');
     } catch (error) {
       console.error('Error submitting result:', error);
     }
@@ -65,24 +68,28 @@ function TakeTest() {
   return (
     <div className="card">
       <h2 className="card-title">Bài kiểm tra</h2>
-      {questions.map((q, index) => (
-        <div key={q._id} className="exam-card">
-          <div className="exam-info">
-            <div className="exam-title">{`${index + 1}. ${q.questionText}`}</div>
-            <div className="exam-meta">
-              {q.options.map((opt, index) => (
-                <div key={index} className="option">
-                  <input 
-                    type="radio" 
-                    name={`question-${q._id}`} 
-                    onChange={() => handleOptionChange(q._id, index)} 
-                  /> {opt}
-                </div>
-              ))}
+      {questions.length === 0 ? (
+        <p>Không có câu hỏi nào để hiển thị.</p>
+      ) : (
+        questions.map((q, index) => (
+          <div key={q._id} className="exam-card">
+            <div className="exam-info">
+              <div className="exam-title">{`${index + 1}. ${q.questionText}`}</div>
+              <div className="exam-meta">
+                {q.options.map((opt, optIndex) => (
+                  <div key={optIndex} className="option">
+                    <input 
+                      type="radio" 
+                      name={`question-${q._id}`} 
+                      onChange={() => handleOptionChange(q._id, optIndex)} 
+                    /> {opt}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      )}
       <button className="btn-primary submit-button" onClick={handleSubmit}>Nộp bài</button>
     </div>
   );

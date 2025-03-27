@@ -55,7 +55,7 @@ function StudentHome() {
           <Route path="/" element={<Navigate to="/student/test-list" />} />
           <Route path="/test-list" element={<TestList />} />
           <Route path="/test-history" element={<TestHistory />} />
-          <Route path="/take-test" element={<TakeTest />} />
+          <Route path="/take-test/:id" element={<TakeTest />} />
           <Route path="/test-result" element={<TestResult />} />
         </Routes>
       </div>
