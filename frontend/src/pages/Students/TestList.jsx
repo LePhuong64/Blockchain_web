@@ -37,7 +37,7 @@ function TestList() {
   return (
     <div>
       <div className="card">
-        <h2 className="card-title">Danh sách bài kiểm tra</h2>
+        <h2 className="card-title">Ngân hàng đề </h2>
         
         {tests.length > 0 ? (
           tests.map((test) => (

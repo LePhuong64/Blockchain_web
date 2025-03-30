@@ -56,8 +56,8 @@ const SignUp = () => {
               autoComplete="new-password"
             />
           </div>
-          <div className="nhom-truong-nhap">
-            <label>
+          <div className="nhom-truong-nhap" style={{ display: "flex", gap: "15px", alignItems: "center" }}>
+            <label style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <input
                 type="radio"
                 value="student"
@@ -66,7 +66,7 @@ const SignUp = () => {
               />
               Học sinh
             </label>
-            <label>
+            <label style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <input
                 type="radio"
                 value="teacher"
@@ -75,7 +75,7 @@ const SignUp = () => {
               />
               Giáo viên
             </label>
-            <label>
+            <label style={{ display: "flex", alignItems: "center", gap: "5px" }}>
               <input
                 type="radio"
                 value="manager"

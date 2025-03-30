@@ -56,7 +56,7 @@ function StudentHome() {
           <Route path="/test-list" element={<TestList />} />
           <Route path="/test-history" element={<TestHistory />} />
           <Route path="/take-test/:id" element={<TakeTest />} />
-          <Route path="/test-result" element={<TestResult />} />
+          <Route path="/test-result" element={<TestResult />} /> {/* Thêm dòng này */}
         </Routes>
       </div>
     </div>

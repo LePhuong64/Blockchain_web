@@ -94,7 +94,7 @@ function CreateExam() {
   };
 
   return (
-    <div className="card">
+    <div className="create-exam-container">
       <h2 className="card-title">Ngân hàng đề</h2>
       <div className="form-container">
         <form onSubmit={handleSubmit}>

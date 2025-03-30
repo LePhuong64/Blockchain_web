@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Link, useLocation, Navigate, useNavigate } from "react-router-dom";
-import ChiTietBaiKiemTra from './ChiTietBaiKiemTra';
+import ChiTietBaiKiemTra from './Questionlist';
 import QuanLyBaiKiemTra from "./QuanLyBaiKiemTra";
 import '../../App.css'; 
 
@@ -51,7 +51,7 @@ function ManagerDashboard() {
       <div className="content">
         <Routes>
           <Route path="/" element={<Navigate to="/manager/quan-ly-bai-kiem-tra" />} />
-          <Route path="/chi-tiet-bai-kiem-tra" element={<ChiTietBaiKiemTra />} />
+          <Route path="/chi-tiet-bai-kiem-tra/:examId" element={<ChiTietBaiKiemTra />} />
           <Route path="/quan-ly-bai-kiem-tra" element={<QuanLyBaiKiemTra />} />
         </Routes>
       </div>

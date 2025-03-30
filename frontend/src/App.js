@@ -40,6 +40,7 @@ function App() {
         <Route path="/student/*" element={<PrivateRoute allowedRole="student"><StudentHome /></PrivateRoute>} />
         <Route path="/teacher/*" element={<PrivateRoute allowedRole="teacher"><TeacherDashboard /></PrivateRoute>} />
         <Route path="/manager/*" element={<PrivateRoute allowedRole="manager"><ManagerDashboard /></PrivateRoute>} />
+        
       </Routes>
     </Router>
   );

@@ -34,8 +34,8 @@ function ManageExam() {
   }, []);
 
   return (
-    <div className="card">
-      <h2 className="card-title">Quản lý bài kiểm tra</h2>
+    <div className="manage-exam-container">
+      <h2 className="card-title">Ngân hàng đề</h2>
       {exams.map((exam) => (
         <div key={exam._id} className="exam-card">
           <div className="exam-info">

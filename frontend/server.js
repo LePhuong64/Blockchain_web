@@ -6,7 +6,7 @@ const examRoutes = require('./routes/examRoutes');
 const authMiddleware = require('./middlewares/authMiddleware');
 const app = express();
 const questionRoutes = require('./routes/questionRouter');
-const submissionRouter = require('./routes/submissionRouter');
+
 
 connectDB();
 app.use(cors());
@@ -19,7 +19,7 @@ app.post('/api/login', authController.login);
 app.use(authMiddleware);
 app.use('/api', examRoutes);
 app.use('/api/questions', questionRoutes);
-app.use('/api/submissions', submissionRouter);
+
 
 app.listen(5000, () => {
   console.log('Server is running on port 5000');

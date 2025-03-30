@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route, Link, useLocation, Navigate, useNavigate } from "react-router-dom";
 import CreateExam from './CreateExam';
 import ManageExam from "./ManageExam";
-import '../../App.css'; 
+import '../../App.css';
 
 function TeacherDashboard() {
   const location = useLocation();
@@ -20,7 +20,7 @@ function TeacherDashboard() {
       {/* Sidebar */}
       <div className="sidebar">
         <div className="header">
-          Hệ thống chấm điểm tự động bài kiểm tra
+          Hệ thống chấm điểm tự động
         </div>
         
         <div className="user-profile">
@@ -33,33 +33,42 @@ function TeacherDashboard() {
             to="/teacher/manage-exams" 
             className={`menu-item ${path.includes('/manage-exams') ? 'active' : ''}`}
           >
-            Quản lý bài kiểm tra
+            <i className="icon-exam"></i>
+            <span>Quản lý bài kiểm tra</span>
           </Link>
           <Link 
             to="/teacher/student-list" 
             className={`menu-item ${path.includes('/student-list') ? 'active' : ''}`}
           >
-            Danh sách sinh viên
+            <i className="icon-student"></i>
+            <span>Danh sách sinh viên</span>
           </Link>
           <Link 
             to="/teacher/create-exam" 
             className={`menu-item ${path.includes('/create-exam') ? 'active' : ''}`}
           >
-            Tạo bài kiểm tra
+            <i className="icon-create"></i>
+            <span>Tạo bài kiểm tra</span>
           </Link>
           <button onClick={handleLogout} className="menu-item logout-button">
-            Đăng xuất
+            <i className="icon-logout"></i>
+            <span>Đăng xuất</span>
           </button>
         </div>
       </div>
       
       {/* Main content */}
-      <div className="content">
+      <div className="content shared-container">
         <Routes>
           <Route path="/" element={<Navigate to="/teacher/manage-exams" />} />
           <Route path="/create-exam" element={<CreateExam />} />
           <Route path="/manage-exams" element={<ManageExam />} />
-          <Route path="/student-list" element={<div className="card"><h2 className="card-title">Danh sách sinh viên</h2></div>} />
+          <Route path="/student-list" element={
+            <div className="card">
+              <h2 className="card-title">Danh sách sinh viên</h2>
+              <div className="coming-soon">Tính năng đang phát triển</div>
+            </div>
+          } />
         </Routes>
       </div>
     </div>

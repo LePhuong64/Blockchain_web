@@ -1,124 +1,124 @@
+/* Thiết lập hình nền cho trang đăng nhập */
 .khung-dang-nhap {
-    min-height: 100vh;
-    background-size: cover;
+  background-image: url('/public/hoctap.jpg'); /* Chỉ cần /learning.jpg */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;  /* Chiều rộng toàn màn hình */
+  height: 100vh; /* Chiều cao toàn màn hình */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Hộp chứa form đăng nhập */
+.hop-dang-nhap {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Tiêu đề đăng nhập */
+.tieu-de-dang-nhap {
+  color: #1877f2 !important;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 100%;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Form nhập liệu */
+form {
+  width: 100%;
+  max-width: 320px;
+}
+
+.nhom-truong-nhap {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.o-nhap-lieu {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  color: black;
+}
+
+.o-nhap-lieu::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.o-nhap-lieu:focus {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+  outline: none;
+}
+
+/* Nút đăng nhập */
+.nut-dang-nhap {
+  width: 100%;
+  padding: 0.75rem;
+  background: #1877f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1rem 0;
+  font-size: 1rem;
+  box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
+}
+
+.nut-dang-nhap:hover {
+  background: #0d6efd;
+}
+
+/* Liên kết đăng ký */
+.khung-dang-ky {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+}
+
+.lien-ket-dang-ky {
+  color: #1877f2;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 0.25rem;
+}
+
+.lien-ket-dang-ky:hover {
+  text-decoration: underline;
+}
+
+/* Đáp ứng cho màn hình nhỏ */
+@media (max-width: 640px) {
+  .khung-dang-nhap {
     background-position: center;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
-  
+
   .hop-dang-nhap {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 20px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    padding: 2.5rem;
-    width: 100%;
-    max-width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
   }
-  
-  .tieu-de-dang-nhap {
-    color: #1877f2;
-    font-size: 28px;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 2rem;
-    width: 100%;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  form {
-    width: 100%;
-    max-width: 320px;
-  }
-  
-  .nhom-truong-nhap {
-    margin-bottom: 1.5rem;
-    width: 100%;
-  }
-  
-  .o-nhap-lieu {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-    box-sizing: border-box;
-    font-size: 1rem;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    color: black;
-  }
-  
-  .o-nhap-lieu::placeholder {
-    color: rgba(0, 0, 0, 0.6);
-  }
-  
-  .o-nhap-lieu:focus {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: #3498db;
-    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
-    outline: none;
-  }
-  
-  .nut-dang-nhap {
-    width: 100%;
-    padding: 0.75rem;
-    background: #1877f2;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 1rem 0;
-    font-size: 1rem;
-    box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3);
-  }
-  
-  .nut-dang-nhap:hover {
-    background: #0d6efd;
-  }
-  
-  .lien-ket-dang-ky {
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  
-  @media (max-width: 640px) {
-    .khung-dang-nhap {
-      background-position: center;
-    }
-  
-    .hop-dang-nhap {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(10px);
-    }
-  }
-  
-  .o-nhap-lieu:hover {
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-  
-  .khung-dang-ky {
-    text-align: center;
-    margin-top: 1.5rem;
-    color: rgba(0, 0, 0, 0.7);
-    width: 100%;
-  }
-  
-  .lien-ket-dang-ky {
-    color: #1877f2;
-    font-weight: 600;
-    text-decoration: none;
-    margin-left: 0.25rem;
-  }
-  
-  .lien-ket-dang-ky:hover {
-    text-decoration: underline;
-  }
+}

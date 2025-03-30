@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import "../../App.css";
 
 const QuanLyBaiKiemTra = () => {
@@ -7,6 +8,7 @@ const QuanLyBaiKiemTra = () => {
   const [selectedExam, setSelectedExam] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rejectReason, setRejectReason] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchExams = async () => {
@@ -141,7 +143,12 @@ const QuanLyBaiKiemTra = () => {
               </ul>
               <div className="question-section">
                 <span>Xem nội dung các câu hỏi:</span>
-                <button className="question-btn">Xem danh sách câu hỏi</button>
+                <button 
+                  className="question-btn" 
+                  onClick={() => navigate(`/manager/chi-tiet-bai-kiem-tra/${selectedExam._id}`)}
+                >
+                  Xem danh sách câu hỏi
+                </button>
               </div>
               <div className="reject-section">
                 <label>Lý do (nếu từ chối):</label>
