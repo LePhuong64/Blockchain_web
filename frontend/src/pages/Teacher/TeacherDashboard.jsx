@@ -2,7 +2,8 @@ import React from 'react';
 import { Routes, Route, Link, useLocation, Navigate, useNavigate } from "react-router-dom";
 import CreateExam from './CreateExam';
 import ManageExam from "./ManageExam";
-import '../../App.css';
+import '../../styles/Sidebar.css';
+import '../../styles/TeacherDashboard.css'; // Import your CSS file for styling
 
 function TeacherDashboard() {
   const location = useLocation();

@@ -1,0 +1,125 @@
+/* CreateExam.css */
+.create-exam-container {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+
+    /* Căn giữa theo chiều ngang và dọc */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Chiều cao tối thiểu bằng chiều cao màn hình */
+    text-align: center; /* Căn giữa nội dung văn bản */
+}
+
+.form-container {
+    max-width: 800px; /* Giới hạn chiều rộng tối đa của form */
+    width: 100%; /* Đảm bảo form chiếm toàn bộ chiều rộng container */
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa các thành phần bên trong form */
+}
+
+.form-row {
+    display: flex;
+    gap: 30px; /* Tăng khoảng cách giữa các form-control */
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* Đảm bảo các form-control xuống dòng nếu không đủ không gian */
+    justify-content: center; /* Căn giữa các form-control */
+}
+
+.form-row .form-control {
+    flex: 1 1 48%; /* Tăng chiều rộng của mỗi form-control */
+}
+
+.form-control {
+    margin-bottom: 25px; /* Tăng khoảng cách giữa các form-control */
+    text-align: left; /* Đảm bảo label và input không bị căn giữa */
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    color: #5f6368;
+    margin-bottom: 5px;
+}
+
+.form-input, .form-select {
+    width: 100%; /* Đảm bảo các input và select chiếm toàn bộ chiều rộng của form-control */
+    padding: 12px; /* Tăng padding để các thành phần trông thoáng hơn */
+    border: 1px solid #dadce0;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.question-container {
+    border: 1px solid #dadce0;
+    border-radius: 5px;
+    padding: 25px; /* Tăng padding để nội dung thoáng hơn */
+    margin-bottom: 25px;
+    background-color: #f8f9fa;
+    width: 100%; /* Đảm bảo container câu hỏi chiếm toàn bộ chiều rộng */
+    text-align: left; /* Đảm bảo nội dung câu hỏi không bị căn giữa */
+}
+
+.options-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px; /* Tăng khoảng cách giữa các nhóm đáp án */
+    margin-bottom: 20px;
+    justify-content: center; /* Căn giữa các nhóm đáp án */
+}
+
+.option-group {
+    flex: 1 1 calc(50% - 30px); /* Tăng chiều rộng của mỗi nhóm đáp án */
+}
+
+.added-questions {
+    margin-top: 30px;
+    width: 100%; /* Đảm bảo danh sách câu hỏi chiếm toàn bộ chiều rộng */
+    text-align: left; /* Đảm bảo nội dung không bị căn giữa */
+}
+
+.question-item {
+    border: 1px solid #dadce0;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.btn-primary {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-secondary {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.btn-delete {
+    background-color: #fad2cf;
+    color: #ea4335;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-size: 12px;
+    cursor: pointer;
+}

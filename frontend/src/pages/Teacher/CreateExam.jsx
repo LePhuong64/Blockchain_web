@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../../App.css'; 
+import '../../styles/Sidebar.css';
+import '../../styles/CreateExam.css';
 
 function CreateExam() {
   const [examName, setExamName] = useState('');
   const [duration, setDuration] = useState('60');
-  const [subject, setSubject] = useState(''); // Add subject state
+  const [subject, setSubject] = useState('');
   const [questions, setQuestions] = useState([]);
   const [questionText, setQuestionText] = useState('');
   const [options, setOptions] = useState(['', '', '', '']);
@@ -84,6 +85,7 @@ function CreateExam() {
           Authorization: `Bearer ${token}`
         }
       });
+      console.log('Response:', response.data);
 
       alert('Tạo bài kiểm tra thành công!');
       navigate('/teacher/manage-exams');

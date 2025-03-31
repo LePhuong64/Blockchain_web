@@ -173,7 +173,7 @@ function TakeTest() {
       return;
     }
 
-    const confirmSubmit = window.confirm('Are you sure you want to submit this exam?');
+    const confirmSubmit = window.confirm('Bạn chắc chắn muốn nộp bài ?');
     if (!confirmSubmit) return;
 
     setLoading(prev => ({ ...prev, submit: true }));
@@ -241,8 +241,8 @@ function TakeTest() {
 
   return (
     <div className="card">
-      <h2 className="card-title">Exam: {examInfo.name}</h2>
-      <h3 className="card-subtitle">Subject: {examInfo.subject}</h3>
+      <h2 className="card-title"> {examInfo.name}</h2>
+      <h3 className="card-subtitle">Môn {examInfo.subject}</h3>
       
       {loading.page ? (
         <div className="loading-container">
@@ -283,7 +283,7 @@ function TakeTest() {
               onClick={handleSubmit}
               disabled={loading.submit || !isSubmittable || !isMetaMaskConnected}
             >
-              {loading.submit ? 'Submitting...' : 'Submit Exam'}
+              {loading.submit ? 'Đang nộp...' : 'Nộp bài'}
             </button>
           </div>
         </>

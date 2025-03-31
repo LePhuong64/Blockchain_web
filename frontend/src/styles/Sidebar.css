@@ -1,0 +1,76 @@
+/* Sidebar.css */
+.sidebar {
+    width: 220px;
+    background-color: #f8f9fa;
+    height: 100vh;
+    position: fixed;
+  }
+  
+  .header {
+    background-color: #1a73e8;
+    color: white;
+    padding: 18px 30px;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  
+  .user-profile {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #1a73e8;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .user-name {
+    margin-left: 15px;
+    font-weight: bold;
+    color: #202124;
+  }
+  
+  .menu {
+    padding: 10px 0;
+  }
+  
+  .menu-item {
+    padding: 15px 20px;
+    font-size: 16px;
+    color: #202124;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .menu-item.active {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    font-weight: bold;
+  }
+  
+  .logout-button {
+    background-color: rgb(68, 151, 239);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+    width: calc(100% - 40px);
+    margin: 20px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: rgb(50, 130, 210);
+  }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../../App.css';
+import '../../styles/Sidebar.css';
+import '../../styles/ManageExam.css';
 
 function ManageExam() {
   const [exams, setExams] = useState([]);

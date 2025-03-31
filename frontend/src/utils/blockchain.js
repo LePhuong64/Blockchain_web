@@ -4,23 +4,22 @@ import ExamSystem from '../contracts/ExamSystem.json';
 import BN from 'bn.js';
 
 let web3;
-let isRequestingAccounts = false; // Thêm cờ để kiểm tra trạng thái
-
+let isRequestingAccounts = false; 
 const initWeb3 = async () => {
   if (isRequestingAccounts) {
-    console.log('MetaMask is already processing a request.'); // Log nhẹ nhàng, không throw lỗi
+    console.log('MetaMask is already processing a request.'); 
     return web3;
   }
 
   if (window.ethereum) {
     try {
-      isRequestingAccounts = true; // Đặt cờ khi bắt đầu yêu cầu
+      isRequestingAccounts = true; 
       const accounts = await window.ethereum.request({
-        method: 'eth_accounts', // Kiểm tra tài khoản đã kết nối trước
+        method: 'eth_accounts', 
       });
 
       if (accounts.length === 0) {
-        // Nếu chưa kết nối, yêu cầu người dùng kết nối
+        
         await window.ethereum.request({
           method: 'eth_requestAccounts',
         });
@@ -32,7 +31,7 @@ const initWeb3 = async () => {
       console.error('MetaMask connection error:', error);
       throw new Error('Không thể kết nối MetaMask: ' + error.message);
     } finally {
-      isRequestingAccounts = false; // Đặt lại cờ khi hoàn thành
+      isRequestingAccounts = false; 
     }
   } else {
     throw new Error('Vui lòng cài đặt MetaMask để sử dụng ứng dụng.');
@@ -47,7 +46,7 @@ export const getBlockchain = async () => {
 
     if (!web3 || !web3.eth) {
       console.warn('Web3 is not initialized properly.');
-      return { web3: null, contract: null, accounts: [] }; // Trả về giá trị mặc định
+      return { web3: null, contract: null, accounts: [] }; 
     }
 
     const networkId = await web3.eth.net.getId();
@@ -123,7 +122,7 @@ export const connectMetaMask = async () => {
   try {
     const { accounts } = await getBlockchain();
     if (accounts.length > 0) {
-      localStorage.setItem('isMetaMaskConnected', 'true'); // Save connection state
+      localStorage.setItem('isMetaMaskConnected', 'true'); 
       return { isConnected: true, accounts };
     }
     return { isConnected: false, error: 'No accounts found' };
