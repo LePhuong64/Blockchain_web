@@ -26,8 +26,8 @@ function StudentHome() {
         </div>
         
         <div className="user-profile">
-          <div className="user-avatar">HS</div>
-          <div className="user-name">Học sinh</div>
+          <div className="user-avatar">SV</div>
+          <div className="user-name">Sinh Viên</div>
         </div>
         
         <div className="menu">

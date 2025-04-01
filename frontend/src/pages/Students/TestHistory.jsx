@@ -1,54 +1,73 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getBlockchain } from '../../utils/blockchain';
+import axios from 'axios';
+import { 
+  getBlockchain,
+  getSubmittedExamIds,
+  getStudentSubmission,
+  getExamInfo,
+  objectIdToUint
+} from '../../utils/blockchain';
 // import '../../styles/testhistory.css';
 
 function TestHistory() {
   const [exams, setExams] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchExamHistory = async () => {
       try {
-        const { contract, accounts } = await getBlockchain();
-        
-        const examIds = await contract.methods.getSubmittedExamIds(accounts[0]).call();
-        
+        const { accounts, contract } = await getBlockchain();
+        setAccounts(accounts);
+
+        // Get submitted exam IDs from blockchain
+        const examIds = await contract.methods
+          .getSubmittedExamIds(accounts[0])
+          .call();
+
+        // Fetch exam details for each submission
         const examsData = await Promise.all(
           examIds.map(async (examId) => {
-            const result = await contract.methods.getSubmission(examId, accounts[0]).call();
-            const submission = result[0]; // SubmissionData
-            const answers = result[1]; // StudentAnswer[]
-            
+            const submission = await contract.methods
+              .getSubmission(examId, accounts[0])
+              .call();
+
+            // Fetch exam details from MongoDB
+            const examResponse = await axios.get(
+              `http://localhost:5000/api/exams/${examId}/questions`
+            );
+
             return {
               examId,
-              examName: submission.examName, // Tên bài kiểm tra
-              subject: submission.subject, // Môn học
-              score: submission.score, // Điểm số
-              submittedAt: new Date(submission.submittedAt * 1000), // Thời gian nộp
-              examHash: submission.examHash, // Hash bài kiểm tra
-              answers: answers.map(ans => ({
+              examName: examResponse.data.examName,
+              subject: examResponse.data.subject,
+              score: parseInt(submission.score) / 100,
+              submittedAt: new Date(parseInt(submission.submittedAt) * 1000),
+              examHash: submission.examHash,
+              answers: submission.answers.map(ans => ({
                 questionId: ans.questionId.toString(),
-                chosenOption: ans.chosenOption,
+                chosenOption: parseInt(ans.chosenOption),
                 isCorrect: ans.isCorrect
-              }))
+              })),
+              questions: examResponse.data.questions || []
             };
           })
         );
-    
+
         setExams(examsData);
-        setLoading(false);
-      } catch (err) {
-        console.error('Error fetching exam history:', err);
-        setError('Không thể tải lịch sử bài thi. Vui lòng thử lại.');
+      } catch (error) {
+        console.error('Error fetching exam history:', error);
+        setError('Failed to load exam history');
+      } finally {
         setLoading(false);
       }
     };
 
     fetchExamHistory();
   }, []);
+  const navigate = useNavigate();
 
   const viewExamDetails = (exam) => {
     navigate('/student/test-result', {
@@ -62,16 +81,17 @@ function TestHistory() {
           answers: exam.answers,
           totalQuestions: exam.answers.length,
           correctCount: exam.answers.filter(a => a.isCorrect).length,
-          wrongCount: exam.answers.filter(a => !a.isCorrect).length
+          wrongCount: exam.answers.filter(a => !a.isCorrect).length,
+          studentAddress: accounts[0],
         },
-        questions: exam.answers.map(ans => ({
+        questions: exam.questions.length > 0 ? exam.questions : exam.answers.map((ans, idx) => ({
           _id: ans.questionId,
-          questionText: `Question ${ans.questionId}`,
-          options: ['Option 1', 'Option 2', 'Option 3', 'Option 4'],
+          questionText: `Câu hỏi ${idx + 1}`,
+          options: ['Không có dữ liệu', 'Không có dữ liệu', 'Không có dữ liệu', 'Không có dữ liệu'],
           correctAnswer: 0
         })),
         txHash: 'N/A'
-      },
+      }
     });
   };
 
@@ -129,7 +149,10 @@ function TestHistory() {
               </div>
 
               <div className="exam-actions">
-                <button className="btn-details" onClick={() => viewExamDetails(exam)}>
+                <button 
+                  className="btn-details" 
+                  onClick={() => viewExamDetails(exam)}
+                >
                   Xem lại bài làm
                 </button>
               </div>

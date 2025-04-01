@@ -1,16 +1,14 @@
-const mongoose = require('mongoose');
+import axios from 'axios';
 
-const connectDB = async () => {
+const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+export const fetchQuestions = async () => {
   try {
-    await mongoose.connect('mongodb://localhost:27017/test', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected');
+    const response = await axios.get(`${API_BASE_URL}/questions`);
+    return response.data;
   } catch (error) {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
+    console.error('Error fetching questions:', error);
+    throw error;
   }
 };
 
-module.exports = connectDB;

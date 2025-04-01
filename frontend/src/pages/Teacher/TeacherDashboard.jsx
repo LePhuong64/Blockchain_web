@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Link, useLocation, Navigate, useNavigate } from "react-router-dom";
 import CreateExam from './CreateExam';
 import ManageExam from "./ManageExam";
+import QuanLySinhVien from './QuanLySinhVien';
 import '../../styles/Sidebar.css';
 import '../../styles/TeacherDashboard.css'; // Import your CSS file for styling
 
@@ -38,11 +39,11 @@ function TeacherDashboard() {
             <span>Quản lý bài kiểm tra</span>
           </Link>
           <Link 
-            to="/teacher/student-list" 
+            to="/teacher/student-list/:examId" 
             className={`menu-item ${path.includes('/student-list') ? 'active' : ''}`}
           >
             <i className="icon-student"></i>
-            <span>Danh sách sinh viên</span>
+            <span>Quản lý sinh viên</span>
           </Link>
           <Link 
             to="/teacher/create-exam" 
@@ -70,6 +71,7 @@ function TeacherDashboard() {
               <div className="coming-soon">Tính năng đang phát triển</div>
             </div>
           } />
+          <Route path="/student-list/:examId" element={<QuanLySinhVien />} />
         </Routes>
       </div>
     </div>

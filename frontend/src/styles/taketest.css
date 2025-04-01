@@ -16,15 +16,14 @@
 }
 
 .exam-card {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: block; /* Đổi từ flex sang block để các phần tử con chiếm toàn bộ chiều ngang */
   border: 1px solid #dadce0;
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
+  width: 100%; /* Đảm bảo card chiếm toàn bộ chiều ngang */
 }
 
 .exam-card:hover {
@@ -34,27 +33,32 @@
 .exam-info {
   display: flex;
   flex-direction: column;
+  width: 100%; /* Đảm bảo phần thông tin chiếm toàn bộ chiều ngang */
 }
 
 .exam-title {
   font-size: 18px;
   font-weight: bold;
   color: #202124;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  word-wrap: break-word; /* Đảm bảo câu hỏi không bị tràn */
+  width: 100%; /* Đảm bảo tiêu đề chiếm toàn bộ chiều ngang */
 }
 
 .exam-meta {
   font-size: 16px;
   color: #5f6368;
+  width: 100%; /* Đảm bảo meta chiếm toàn bộ chiều ngang */
 }
 
 .option {
   display: flex;
-  align-items: center; /* Align items vertically centered */
+  align-items: center;
   font-size: 16px;
   color: #202124;
   margin-bottom: 8px;
   padding-left: 20px;
+  width: 100%; /* Đảm bảo option chiếm toàn bộ chiều ngang */
 }
 
 .option input {

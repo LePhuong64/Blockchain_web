@@ -1,37 +1,33 @@
 import CryptoJS from 'crypto-js';
 import Web3 from 'web3';
-import ExamSystem from '../contracts/ExamSystem.json';
+import ExamSystemABI from '../contracts/ExamSystemABI';
+import contractAddress from '../utils/contractAddress';
 import BN from 'bn.js';
 
 let web3;
-let isRequestingAccounts = false; 
+let isConnectingMetaMask = false; // Trạng thái kết nối MetaMask
+let connectPromise = null; // Lưu trữ promise để tránh gọi lại nhiều lần
+
 const initWeb3 = async () => {
-  if (isRequestingAccounts) {
-    console.log('MetaMask is already processing a request.'); 
-    return web3;
+  if (isConnectingMetaMask) {
+    console.warn('MetaMask đang xử lý yêu cầu. Vui lòng đợi.');
+    return connectPromise; // Trả về promise đang xử lý
   }
 
   if (window.ethereum) {
     try {
-      isRequestingAccounts = true; 
-      const accounts = await window.ethereum.request({
-        method: 'eth_accounts', 
+      isConnectingMetaMask = true; // Đánh dấu đang kết nối
+      connectPromise = window.ethereum.request({ method: 'eth_requestAccounts' }).then(() => {
+        web3 = new Web3(window.ethereum);
+        return web3;
       });
-
-      if (accounts.length === 0) {
-        
-        await window.ethereum.request({
-          method: 'eth_requestAccounts',
-        });
-      }
-
-      web3 = new Web3(window.ethereum);
-      return web3;
+      return await connectPromise; // Đợi kết nối hoàn tất
     } catch (error) {
       console.error('MetaMask connection error:', error);
       throw new Error('Không thể kết nối MetaMask: ' + error.message);
     } finally {
-      isRequestingAccounts = false; 
+      isConnectingMetaMask = false; // Đặt lại trạng thái sau khi hoàn tất
+      connectPromise = null; // Xóa promise sau khi hoàn thành
     }
   } else {
     throw new Error('Vui lòng cài đặt MetaMask để sử dụng ứng dụng.');
@@ -44,27 +40,12 @@ export const getBlockchain = async () => {
       web3 = await initWeb3();
     }
 
-    if (!web3 || !web3.eth) {
-      console.warn('Web3 is not initialized properly.');
-      return { web3: null, contract: null, accounts: [] }; 
-    }
-
-    const networkId = await web3.eth.net.getId();
-    const deployedNetwork = ExamSystem.networks[networkId];
-
-    if (!deployedNetwork) {
-      throw new Error(`Hợp đồng chưa được triển khai trên mạng ${networkId}`);
-    }
-
-    const contract = new web3.eth.Contract(
-      ExamSystem.abi,
-      deployedNetwork.address
-    );
-
     const accounts = await web3.eth.getAccounts();
     if (accounts.length === 0) {
       throw new Error('Không tìm thấy tài khoản MetaMask');
     }
+
+    const contract = new web3.eth.Contract(ExamSystemABI, contractAddress);
 
     return { web3, contract, accounts };
   } catch (error) {
@@ -118,18 +99,14 @@ const normalizeAnswerIndex = (answer) => {
   return -1;
 };
 
-export const connectMetaMask = async () => {
+export const getExamResultsWithDetails = async (examId) => {
   try {
-    const { accounts } = await getBlockchain();
-    if (accounts.length > 0) {
-      localStorage.setItem('isMetaMaskConnected', 'true'); 
-      return { isConnected: true, accounts };
-    }
-    return { isConnected: false, error: 'No accounts found' };
+    const { contract } = await getBlockchain();
+    const results = await contract.methods.getExamResultsWithDetails(examId).call();
+    return results;
   } catch (error) {
-    console.error('MetaMask connection error:', error);
-    return { isConnected: false, error: error.message };
+    console.error('Error fetching exam results with details:', error);
+    throw error;
   }
 };
 
-export default getBlockchain; 

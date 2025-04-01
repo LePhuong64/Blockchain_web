@@ -4,6 +4,7 @@ const Question = require('../models/Question');
 exports.createExam = async (req, res) => {
   try {
     const { name, date, duration, subject, questions } = req.body;
+    console.log(name)
 
     if (!name || !date || !duration || !subject || !Array.isArray(questions)) {
       return res.status(400).json({ error: 'Missing required fields or invalid question format' });
