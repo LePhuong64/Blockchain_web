@@ -40,7 +40,7 @@ function TakeTest() {
   useEffect(() => {
     const fetchExamData = async () => {
       const token = localStorage.getItem('token');
-      
+
       try {
         const [examRes, questionsRes] = await Promise.all([
           axios.get(`http://localhost:5000/api/exams/${id}`, {
@@ -53,6 +53,10 @@ function TakeTest() {
 
         setExamInfo(examRes.data);
         setQuestions(questionsRes.data.questions || []);
+        console.log("Fetched questions:", questionsRes.data.questions);
+        questionsRes.data.questions.forEach(q => {
+          console.log(`Question: ${q.questionText}, Correct Answer (from API): ${q.correctAnswer}`);
+        });
 
         // Kiểm tra kết nối MetaMask
         if (!isMetaMaskConnected) {
@@ -101,19 +105,23 @@ function TakeTest() {
   useEffect(() => {
     const answeredCount = Object.keys(answers).length;
     setIsSubmittable(answeredCount === questions.length && questions.length > 0);
-    
+
     if (answeredCount === questions.length && questions.length > 0) {
+
       setValidationError('');
     }
   }, [answers, questions]);
 
   // Normalize correct answer format
+
   const normalizeCorrectAnswer = (correctAnswer) => {
     if (typeof correctAnswer === 'number') return correctAnswer;
     if (typeof correctAnswer === 'string') return parseInt(correctAnswer, 10);
     if (correctAnswer?.$numberInt) return parseInt(correctAnswer.$numberInt, 10);
     return 0;
   };
+
+
 
   // Handle option selection
   const handleOptionChange = (questionId, optionIndex) => {
@@ -131,7 +139,7 @@ function TakeTest() {
     }
 
     const preparedAnswers = questions.map(question => {
-      const chosenOptionIndex = answers[question._id] !== undefined ? 
+      const chosenOptionIndex = answers[question._id] !== undefined ?
         parseInt(answers[question._id], 10) : -1;
 
       if (chosenOptionIndex < 0 || chosenOptionIndex >= question.options.length) {
@@ -191,6 +199,9 @@ function TakeTest() {
         correctAnswers.map(ans => Number(ans))
       ).send({ from: accounts[0] });
 
+      console.log("correctAnswers:", correctAnswers.map(ans => Number(ans)));
+      console.log("accounts[0]:", accounts[0]);
+
       const correctCount = preparedAnswers.filter(a => a.isCorrect).length;
       const score = (correctCount * 10) / questions.length; // Adjusted to scale score to 10
 
@@ -222,8 +233,8 @@ function TakeTest() {
       console.error('Error submitting exam:', error);
 
       let errorMessage = 'Submission failed';
-      if (error.message.includes("Invalid correct answers data") || 
-          error.message.includes("invalid correct answer")) {
+      if (error.message.includes("Invalid correct answers data") ||
+        error.message.includes("invalid correct answer")) {
         errorMessage = "System error: Invalid answer data. Please contact admin.";
       } else if (error.message.includes("revert")) {
         errorMessage = "Transaction rejected by contract";
@@ -243,7 +254,7 @@ function TakeTest() {
     <div className="card">
       <h2 className="card-title"> {examInfo.name}</h2>
       <h3 className="card-subtitle">Môn {examInfo.subject}</h3>
-      
+
       {loading.page ? (
         <div className="loading-container">
           <div className="spinner"></div>
@@ -270,7 +281,7 @@ function TakeTest() {
               </div>
             </div>
           ))}
-          
+
           <div className="submit-section">
             {validationError && (
               <p className="warning-message">{validationError}</p>
@@ -278,8 +289,8 @@ function TakeTest() {
             {metaMaskError && (
               <p className="error-message">{metaMaskError}</p>
             )}
-            <button 
-              className={`btn-primary submit-button ${!isSubmittable || !isMetaMaskConnected ? 'disabled-btn' : ''}`} 
+            <button
+              className={`btn-primary submit-button ${!isSubmittable || !isMetaMaskConnected ? 'disabled-btn' : ''}`}
               onClick={handleSubmit}
               disabled={loading.submit || !isSubmittable || !isMetaMaskConnected}
             >

@@ -356,7 +356,7 @@
 }
 
 .stat-item.time {
-  border-top: 4px solid #ecc94b; /* Đường viền vàng đậm */
+  border-top: 4px solid #ecc94b; 
   text-align: center;
 }
 

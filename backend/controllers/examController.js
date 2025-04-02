@@ -1,13 +1,15 @@
-const Exam = require('../models/Exam');
-const Question = require('../models/Question');
+const Exam = require("../models/Exam");
+const Question = require("../models/Question");
 
 exports.createExam = async (req, res) => {
   try {
     const { name, date, duration, subject, questions } = req.body;
-    console.log(name)
+    console.log(name);
 
     if (!name || !date || !duration || !subject || !Array.isArray(questions)) {
-      return res.status(400).json({ error: 'Missing required fields or invalid question format' });
+      return res
+        .status(400)
+        .json({ error: "Missing required fields or invalid question format" });
     }
 
     // 1️⃣ Tạo Exam trước, nhưng chưa có questionIds
@@ -21,17 +23,17 @@ exports.createExam = async (req, res) => {
           questionText: q.questionText,
           options: q.options,
           correctAnswer: q.correctAnswer,
-          examId: exam._id
+          examId: exam._id,
         });
         return await newQuestion.save();
       })
     );
 
     // 3️⃣ Cập nhật danh sách questionIds vào Exam
-    exam.questionIds = createdQuestions.map(q => q._id);
+    exam.questionIds = createdQuestions.map((q) => q._id);
     await exam.save();
 
-    res.status(201).json({ message: 'Exam created successfully', exam });
+    res.status(201).json({ message: "Exam created successfully", exam });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -42,10 +44,10 @@ exports.getExams = async (req, res) => {
   const filter = status ? { status } : {};
 
   try {
-    const exams = await Exam.find(filter).populate('questionIds');
-    const examsWithQuestionCount = exams.map(exam => ({
+    const exams = await Exam.find(filter).populate("questionIds");
+    const examsWithQuestionCount = exams.map((exam) => ({
       ...exam.toObject(),
-      questionCount: exam.questionIds.length // Thêm số lượng câu hỏi
+      questionCount: exam.questionIds.length, // Thêm số lượng câu hỏi
     }));
     res.json(examsWithQuestionCount);
   } catch (error) {
@@ -55,9 +57,9 @@ exports.getExams = async (req, res) => {
 
 exports.getExamById = async (req, res) => {
   try {
-    const exam = await Exam.findById(req.params.id).populate('questionIds');
+    const exam = await Exam.findById(req.params.id).populate("questionIds");
     if (!exam) {
-      return res.status(404).json({ error: 'Exam not found' });
+      return res.status(404).json({ error: "Exam not found" });
     }
     res.json(exam);
   } catch (error) {
@@ -67,22 +69,22 @@ exports.getExamById = async (req, res) => {
 
 exports.updateExam = async (req, res) => {
   const { examId } = req.params;
-  const { name, date, duration, subject, questions } = req.body; 
+  const { name, date, duration, subject, questions } = req.body;
 
   try {
     const exam = await Exam.findById(examId);
     if (!exam) {
-      return res.status(404).json({ error: 'Exam not found' });
+      return res.status(404).json({ error: "Exam not found" });
     }
 
     exam.name = name;
     exam.date = date;
     exam.duration = duration;
-    exam.subject = subject; 
+    exam.subject = subject;
     exam.questions = questions;
     await exam.save();
 
-    res.status(200).json({ message: 'Exam updated successfully' });
+    res.status(200).json({ message: "Exam updated successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -94,11 +96,11 @@ exports.deleteExam = async (req, res) => {
   try {
     const exam = await Exam.findById(examId);
     if (!exam) {
-      return res.status(404).json({ error: 'Exam not found' });
+      return res.status(404).json({ error: "Exam not found" });
     }
 
     await exam.remove();
-    res.status(200).json({ message: 'Exam deleted successfully' });
+    res.status(200).json({ message: "Exam deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -111,14 +113,14 @@ exports.approveExam = async (req, res) => {
   try {
     const exam = await Exam.findById(examId);
     if (!exam) {
-      return res.status(404).json({ error: 'Exam not found' });
+      return res.status(404).json({ error: "Exam not found" });
     }
 
     exam.approvedBy = userId;
-    exam.status = 'approved';
+    exam.status = "approved";
     await exam.save();
 
-    res.status(200).json({ message: 'Exam approved successfully' });
+    res.status(200).json({ message: "Exam approved successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -131,14 +133,14 @@ exports.rejectExam = async (req, res) => {
   try {
     const exam = await Exam.findById(examId);
     if (!exam) {
-      return res.status(404).json({ error: 'Exam not found' });
+      return res.status(404).json({ error: "Exam not found" });
     }
 
-    exam.status = 'rejected';
+    exam.status = "rejected";
     exam.rejectReason = reason;
     await exam.save();
 
-    res.status(200).json({ message: 'Exam rejected successfully' });
+    res.status(200).json({ message: "Exam rejected successfully" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -155,20 +157,19 @@ exports.getAllQuestionsByExamId = async (req, res) => {
     // Kiểm tra xem bài kiểm tra có tồn tại không
     const exam = await Exam.findById(examId);
     if (!exam) {
-      return res.status(404).json({ message: 'Exam not found' });
+      return res.status(404).json({ message: "Exam not found" });
     }
-    
 
     // Tìm tất cả câu hỏi thuộc về bài kiểm tra đó
+    console.log("Exam ID:", examId);
     const questions = await Question.find({ examId })
-      .select('-correctAnswer')
+      .select("questionText options correctAnswer")
       .skip(skip)
       .limit(limit)
       .exec();
-
     // Đếm tổng số câu hỏi trong bài kiểm tra
     const total = await Question.countDocuments({ examId });
-
+    console.log("Fetched Questions from DB:", questions);
     res.json({
       examId,
       examName: exam.name,
@@ -176,9 +177,13 @@ exports.getAllQuestionsByExamId = async (req, res) => {
       limit,
       total,
       totalPages: Math.ceil(total / limit),
-      questions
+      questions: questions.map(q => ({
+        ...q.toObject(),
+        correctAnswer: q.correctAnswer !== undefined ? q.correctAnswer : null 
+      })),
     });
   } catch (error) {
-    res.status(500).json({ message: 'Server error', error });
+    console.error("Error fetching questions:", error);
+    res.status(500).json({ message: "Server error", error });
   }
-}
+};

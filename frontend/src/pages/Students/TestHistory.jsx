@@ -22,19 +22,19 @@ function TestHistory() {
         const { accounts, contract } = await getBlockchain();
         setAccounts(accounts);
 
-        // Get submitted exam IDs from blockchain
+ 
         const examIds = await contract.methods
           .getSubmittedExamIds(accounts[0])
           .call();
 
-        // Fetch exam details for each submission
+
         const examsData = await Promise.all(
           examIds.map(async (examId) => {
             const submission = await contract.methods
               .getSubmission(examId, accounts[0])
               .call();
 
-            // Fetch exam details from MongoDB
+        
             const examResponse = await axios.get(
               `http://localhost:5000/api/exams/${examId}/questions`
             );
@@ -70,29 +70,7 @@ function TestHistory() {
   const navigate = useNavigate();
 
   const viewExamDetails = (exam) => {
-    navigate('/student/test-result', {
-      state: {
-        submissionData: {
-          examName: exam.examName,
-          examSubject: exam.subject,
-          score: exam.score,
-          examHash: exam.examHash,
-          submittedAt: Math.floor(exam.submittedAt.getTime() / 1000),
-          answers: exam.answers,
-          totalQuestions: exam.answers.length,
-          correctCount: exam.answers.filter(a => a.isCorrect).length,
-          wrongCount: exam.answers.filter(a => !a.isCorrect).length,
-          studentAddress: accounts[0],
-        },
-        questions: exam.questions.length > 0 ? exam.questions : exam.answers.map((ans, idx) => ({
-          _id: ans.questionId,
-          questionText: `Câu hỏi ${idx + 1}`,
-          options: ['Không có dữ liệu', 'Không có dữ liệu', 'Không có dữ liệu', 'Không có dữ liệu'],
-          correctAnswer: 0
-        })),
-        txHash: 'N/A'
-      }
-    });
+    navigate(`/student/test-result/${exam.examId}`);
   };
 
   if (loading) {

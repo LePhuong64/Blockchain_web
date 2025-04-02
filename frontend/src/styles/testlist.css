@@ -1,4 +1,4 @@
-/* ManageExam */
+
 .exam-card {
   display: flex;
   justify-content: space-between;
@@ -9,7 +9,7 @@
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
-  margin-left: 5px; /* Thêm khoảng cách lề trái */
+  margin-left: 5px; 
 }
 
 .exam-card:hover {
@@ -31,7 +31,7 @@
 .exam-meta {
   font-size: 16px;
   color: #5f6368;
-  width: 150px; /* Đặt chiều rộng cố định để căn chỉnh */
+  width: 150px; 
 }
 
 .exam-subject {
@@ -69,9 +69,9 @@
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
-  margin-left: 5px; /* Thêm khoảng cách lề trái */
-  width: 100%; /* Đặt độ rộng 100% */
-  max-width: 1200px; /* Đặt độ rộng tối đa */
+  margin-left: 5px;
+  width: 100%; 
+  max-width: 1200px; 
 }
 
 .test-card:hover {
@@ -81,7 +81,7 @@
 .test-info {
   display: flex;
   flex-direction: column;
-  flex: 1; /* Cho phép test-info chiếm không gian còn lại */
+  flex: 1;
 }
 
 .test-title {
@@ -94,23 +94,23 @@
 .test-meta {
   font-size: 16px;
   color: #5f6368;
-  width: 100%; /* Đặt độ rộng 100% */
+  width: 100%;
 }
 
 .test-meta-row {
   display: flex;
-  justify-content: space-between; /* Đặt các mục meta cách đều nhau */
-  margin-bottom: 5px; /* Thêm khoảng cách giữa các hàng */
+  justify-content: space-between; 
+  margin-bottom: 5px; 
 }
 
 .test-meta-row div {
-  margin-right: 20px; /* Thêm khoảng cách giữa các mục meta */
+  margin-right: 20px; 
 }
 
 .test-actions {
   display: flex;
   justify-content: flex-end;
-  flex-shrink: 0; /* Ngăn test-actions co lại */
+  flex-shrink: 0; 
 }
 
 .btn-primary {

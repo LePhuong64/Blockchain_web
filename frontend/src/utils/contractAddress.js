@@ -1,2 +1,2 @@
-const contractAddress = '0x0a12Ef4B579C4140dc3027e25AAeC822D8e52673'; // Địa chỉ của smart contract đã triển khai
+const contractAddress = '0x1E38b01CbA41c9310e673b805f22392FdaB4B524'; 
 export default contractAddress;

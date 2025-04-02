@@ -4,7 +4,7 @@ import axios from 'axios';
 import "../../App.css";
 
 const Questionlist = () => {
-  const { examId } = useParams(); // Lấy examId từ URL
+  const { examId } = useParams(); 
   const navigate = useNavigate();
   const [questions, setQuestions] = useState([]);
   const [examName, setExamName] = useState('');
@@ -32,7 +32,7 @@ const Questionlist = () => {
   }, [examId]);
 
   const handleBack = () => {
-    navigate(-1); // Quay lại trang trước
+    navigate(-1);
   };
 
   if (loading) {
@@ -59,7 +59,7 @@ const Questionlist = () => {
                 <td>
                   {question.options.map((option, i) => (
                     <div key={i} className={i === question.correctAnswer ? 'approved' : ''}>
-                      {i}. {option} {/* Hiển thị số thứ tự bắt đầu từ 0 */}
+                      {i}. {option}
                     </div>
                   ))}
                 </td>

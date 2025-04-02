@@ -17,11 +17,11 @@ const Login = () => {
       const response = await axios.post('http://localhost:5000/api/login', { email, password });
       const { token, role } = response.data;
       
-      // Lưu thông tin đăng nhập vào localStorage
+     
       localStorage.setItem('token', token);
       localStorage.setItem('role', role);
       
-      // Chuyển hướng dựa trên vai trò người dùng
+  
       switch (role) {
         case 'student':
           navigate('/student/test-list');

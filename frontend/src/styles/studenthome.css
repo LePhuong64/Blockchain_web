@@ -15,7 +15,7 @@ body {
   min-height: 100vh;
 }
 
-/* Auth pages */
+
 .auth-container {
   display: flex;
   justify-content: center;
@@ -122,9 +122,9 @@ body {
 }
 
 .content {
-  margin-left: 240px; /* Giữ khoảng cách với sidebar */
-  width: 83%; /* Chiếm 80% màn hình */
-  max-width: calc(100% - 220px); /* Đảm bảo không bị tràn */
+  margin-left: 240px; 
+  width: 83%; 
+  max-width: calc(100% - 220px); 
   margin-top: 20px;
   margin-bottom: 20px;
   margin-right: auto;

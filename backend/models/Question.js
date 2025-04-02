@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const questionSchema = new mongoose.Schema({
-  examId: { type: mongoose.Schema.Types.ObjectId, ref: 'Exam', required: true }, // Liên kết với Exam
-  questionText: { type: String, required: true }, // Nội dung câu hỏi
-  options: [{ type: String, required: true }], // Danh sách đáp án
-  correctAnswer: { type: Number, required: true }, // Đáp án đúng (index trong `options`)
-}, { timestamps: true }); // Tự động tạo createdAt & updatedAt
+  examId: { type: mongoose.Schema.Types.ObjectId, ref: 'Exam', required: true }, 
+  questionText: { type: String, required: true }, 
+  options: [{ type: String, required: true }], 
+  correctAnswer: { type: Number, required: true }, 
+}, { timestamps: true }); 
 
 module.exports = mongoose.model('Question', questionSchema);

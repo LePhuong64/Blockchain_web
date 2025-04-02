@@ -11,7 +11,7 @@ contract ExamSystem {
     struct ExamSubmission {
         address student;
         uint256 examId;
-        uint8 score; // Điểm từ 0-10
+        uint8 score; 
         string examHash;
         uint256 submittedAt;
     }
@@ -39,7 +39,7 @@ contract ExamSystem {
         require(bytes(examHash).length > 0, "Exam hash cannot be empty");
         require(examId > 0, "Invalid exam ID");
 
-        // Clear previous submission if exists
+   
         delete _answers[examId][msg.sender];
 
         uint8 correctCount = 0;
@@ -60,7 +60,7 @@ contract ExamSystem {
             }));
         }
 
-        // Tính điểm trên thang 10 (làm tròn 1 chữ số thập phân)
+
         uint8 score = uint8((correctCount * 1000) / studentAnswers.length) / 100;
 
         _submissions[examId][msg.sender] = ExamSubmission({
@@ -94,7 +94,7 @@ contract ExamSystem {
     }
 
     function getSubmittedExamIds(address student) external view returns (uint256[] memory) {
-        uint256[] memory examIds = new uint256[](examCount); // `examCount` là tổng số bài kiểm tra
+        uint256[] memory examIds = new uint256[](examCount); 
         uint256 count = 0;
 
         for (uint256 i = 1; i <= examCount; i++) {
@@ -104,7 +104,7 @@ contract ExamSystem {
             }
         }
 
-        // Resize array to actual count
+
         uint256[] memory result = new uint256[](count);
         for (uint256 j = 0; j < count; j++) {
             result[j] = examIds[j];

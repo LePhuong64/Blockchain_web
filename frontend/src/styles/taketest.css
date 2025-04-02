@@ -16,14 +16,14 @@
 }
 
 .exam-card {
-  display: block; /* Đổi từ flex sang block để các phần tử con chiếm toàn bộ chiều ngang */
+  display: block;
   border: 1px solid #dadce0;
   border-radius: 5px;
   padding: 15px;
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
-  width: 100%; /* Đảm bảo card chiếm toàn bộ chiều ngang */
+  width: 100%;
 }
 
 .exam-card:hover {
@@ -33,7 +33,7 @@
 .exam-info {
   display: flex;
   flex-direction: column;
-  width: 100%; /* Đảm bảo phần thông tin chiếm toàn bộ chiều ngang */
+  width: 100%; 
 }
 
 .exam-title {
@@ -41,14 +41,14 @@
   font-weight: bold;
   color: #202124;
   margin-bottom: 10px;
-  word-wrap: break-word; /* Đảm bảo câu hỏi không bị tràn */
-  width: 100%; /* Đảm bảo tiêu đề chiếm toàn bộ chiều ngang */
+  word-wrap: break-word; 
+  width: 100%; 
 }
 
 .exam-meta {
   font-size: 16px;
   color: #5f6368;
-  width: 100%; /* Đảm bảo meta chiếm toàn bộ chiều ngang */
+  width: 100%; 
 }
 
 .option {
@@ -58,11 +58,24 @@
   color: #202124;
   margin-bottom: 8px;
   padding-left: 20px;
-  width: 100%; /* Đảm bảo option chiếm toàn bộ chiều ngang */
+  width: 100%; 
+  padding: 5px;
+  margin: 5px 0;
+  /* border: 1px solid #ccc;
+  border-radius: 4px; */
+}
+
+.option.selected {
+  background-color: #f0f8ff;
+  border-color: #007bff;
 }
 
 .option input {
-  margin-right: 10px; /* Add margin to the right of the input */
+  margin-right: 10px; 
+}
+
+.option input[type="radio"] {
+  margin-right: 10px;
 }
 
 .submit-button {
